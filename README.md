@@ -53,13 +53,14 @@ Usage: cat urls.txt | go4url
 Extract URLs from Input e.g. JS Files
 
 Options:
+  -all
+    	Extract all paths
   -c int
     	Concurrency level (default 1)
   -nd
     	Ignore and suppress error messages
   -urls string
     	File containing URLs
-
 
 ```
 

@@ -17,6 +17,7 @@ import (
 
 var (
 	noDisplayErrors bool
+	extractAll      bool
 )
 
 func init() {
@@ -49,6 +50,7 @@ func main() {
 	urlsFile := flag.String("urls", "", "File containing URLs")
 	concurrency := flag.Int("c", 1, "Concurrency level")
 	flag.BoolVar(&noDisplayErrors, "nd", false, "Ignore and suppress error messages")
+	flag.BoolVar(&extractAll, "all", false, "Extract all paths")
 	flag.Parse()
 
 	var urls []string
@@ -176,8 +178,16 @@ func extractFullURLs(u string) ([]string, error) {
 		urls = append(urls, match)
 	}
 
-	// Extract relative URL paths starting and ending with "/"
-	relativeRegex := regexp.MustCompile(`(?m)^/[\w/.-]+/$`)
+	// Decide which regex pattern to use based on the extractAll flag
+	var relativeRegexPattern string
+	if extractAll {
+		relativeRegexPattern = `(?m)/[\w/.-]+/?`
+	} else {
+		relativeRegexPattern = `(?m)/[\w/.-]+/$`
+	}
+
+	// Extract URLs using the decided pattern
+	relativeRegex := regexp.MustCompile(relativeRegexPattern)
 	relativeMatches := relativeRegex.FindAllString(string(body), -1)
 
 	for _, match := range relativeMatches {
