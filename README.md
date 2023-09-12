@@ -1,4 +1,4 @@
-# GoURL
+# Go4URL
 
 Reads URLs from STID or url input flag, extracts all endpoints, both absolute and relative URL endpoints.
 
