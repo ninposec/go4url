@@ -5,7 +5,18 @@ Reads URLs from STID or url input flag, extracts all endpoints, both absolute an
 A common use case is extracting URL endpoints from Javascript files.
 
 
-### Installation
+## Requirements
+
+Golang must be installed.
+
+
+## Installation
+
+```bash
+go install -v github.com/ninposec/go4url@latest
+```
+This will download and install the tool in your system's $GOPATH/bin directory.
+
 
 ### Usage
 
